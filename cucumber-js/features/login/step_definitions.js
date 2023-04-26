@@ -1,11 +1,17 @@
-const { Given, When, Then, After } = require('cucumber')
+const { Given, When, Then, Before, After } = require('cucumber')
 const { Builder, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
-
 let driver
 
+
+Before(async function () {
+    driver = await new Builder()
+        .forBrowser('chrome')
+        .build()
+})
+
+
 Given('I am on the login page', async function () {
-    driver = await new Builder().forBrowser('chrome').build()
     await driver.get('http://localhost:3000/login')
 })
 
